@@ -1,4 +1,5 @@
-
+//Always follow this DRY principle..
+//Don't Repeat yourself
 
 console.log('Reading the cli value using the Yargs');
 
@@ -16,34 +17,32 @@ const _ = require('lodash');
 const yargs = require('yargs');
 
 
-console.log("process :"+process.argv);
+console.log("process :" + process.argv);
 
 const argv1 = yargs.argv;
 var command = process.argv[2];
-console.log('command: ',command);
-console.log('process',process.argv);
-console.log('Yargs',argv1); //this is the variable comes from the yargs lib
+console.log('command: ', command);
+console.log('process', process.argv);
+console.log('Yargs', argv1); //this is the variable comes from the yargs lib
 
 /* if condition checking*/
 if (command === 'add') {
-  var note = yargsNotes.addNote(argv1.title,argv1.body)
+    var note = yargsNotes.addNote(argv1.title, argv1.body)
     //if(typeof note === undefined ){ check for an object is not working. But Lo-dash rocks...
-        if(_.isObject(note)){
-        console.log('Object has been create: '+ note);
-        console.log(`Node Title : ${note.title}`); //injecting with the help of template strings...
-    }else{
+    if (_.isObject(note)) {
+        console.log('Object has been create: ' + note);
+        yargsNotes.logNote(note);
+    } else {
         console.log('Record is not created already exists...');
     }
 } else if (command === 'list') {
     yargsNotes.getAllNotes();
 } else if (command === 'read') {
     var note = yargsNotes.getReader(argv1.title);
-    if(note){
+    if (note) {
         console.log('Values are read values');
-        console.log('---------------------------');
-        console.log(`Values of the title are: ${note.title}`);
-        console.log(`Values of the body are: ${note.body}`);
-    }else{
+        yargsNotes.logNote(note);
+    } else {
         console.log('No values found for the given keyword');
     }
 } else if (command === "erase") {

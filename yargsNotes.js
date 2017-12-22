@@ -83,6 +83,14 @@ var getReader = (title) => {
     return filtered[0];
 }; //end of getReader module...
 
+//to solve the DRY issue
+var logNote = (note) => {
+    console.log('---------------------------');
+    console.log(`Node Title : ${note.title}`); //injecting with the help of template strings...
+    console.log(`Note body are: ${note.body}`);
+    console.log('---------------------------');
+};
+
 module.exports = {
     //addNotes: addNotes ; or addNotes both are same here.
     addNote,
@@ -91,7 +99,8 @@ module.exports = {
     //reader for reading the file.
     getReader,
     //remover for removing the file.
-    removeFile
+    removeFile,
+    logNote //don't forgot to add here...
 };
 
 
