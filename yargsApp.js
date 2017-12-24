@@ -36,7 +36,12 @@ if (command === 'add') {
         console.log('Record is not created already exists...');
     }
 } else if (command === 'list') {
-    yargsNotes.getAllNotes();
+    var allNotes = yargsNotes.getAllNotes();
+    yargsNotes.logNote(allNotes);
+   console.log(`printing ${allNotes.length} note(s).`);
+    allNotes.forEach((note) => yargsNotes.logNote(note)
+    );
+
 } else if (command === 'read') {
     var note = yargsNotes.getReader(argv1.title);
     if (note) {

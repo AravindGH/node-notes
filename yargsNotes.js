@@ -46,7 +46,7 @@ var addNote = (title, body) => {
 };
 
 var getAllNotes = () => {
-    console.log('Listing all the notes that are available');
+   return fetchNotes();
 };
 
 var removeFile = (title) => {
@@ -85,6 +85,8 @@ var getReader = (title) => {
 
 //to solve the DRY issue
 var logNote = (note) => {
+
+    //read the command 
     console.log('---------------------------');
     console.log(`Node Title : ${note.title}`); //injecting with the help of template strings...
     console.log(`Note body are: ${note.body}`);
