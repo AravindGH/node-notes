@@ -19,7 +19,40 @@ const yargs = require('yargs');
 
 console.log("process :" + process.argv);
 
-const argv1 = yargs.argv;
+//const for storing the title, we did this to achieve the DRY concept
+const titleOptions = {
+    describe: 'Title of note',
+    demand: true,
+    alias: 't'
+};
+
+//const for storing the body,||y we did this to achieve the DRY concept
+const bodyOptions = {
+    describe: 'The body of the note',
+    demand: true,
+    alias: 'b'
+};
+
+const argv1 = yargs
+    .command('add', 'Add a new note', {
+        title: titleOptions,
+        body: bodyOptions
+    }
+    )
+    .command('list', 'List of notes')
+    .command('read', 'read a notes', {
+        title: titleOptions
+    })
+    .command('erase', 'erase the notes', {
+        title: titleOptions
+    })
+    .help()
+    .argv;
+//help command help the user to know what is the argument that is required for the method.
+//yargs.command is really useful one where we would be able to set the alias name for the command 
+//line arguments as well...
+
+/*******************************************************************************/
 var command = process.argv[2];
 console.log('command: ', command);
 console.log('process', process.argv);
@@ -38,7 +71,7 @@ if (command === 'add') {
 } else if (command === 'list') {
     var allNotes = yargsNotes.getAllNotes();
     yargsNotes.logNote(allNotes);
-   console.log(`printing ${allNotes.length} note(s).`);
+    console.log(`printing ${allNotes.length} note(s).`);
     allNotes.forEach((note) => yargsNotes.logNote(note)
     );
 
